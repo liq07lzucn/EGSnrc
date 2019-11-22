@@ -1,8 +1,8 @@
-
+/*
 ###############################################################################
 #
-#  EGSnrc egs++ makefile to build radiative splitting object
-#  Copyright (C) 2018 National Research Council Canada
+#  EGSnrc egs++ egs_app application array sizes headers
+#  Copyright (C) 2015 National Research Council Canada
 #
 #  This file is part of EGSnrc.
 #
@@ -21,28 +21,27 @@
 #
 ###############################################################################
 #
-#  Author:          Ernesto Mainegra-Hing, 2018
+#  Author:          Iwan Kawrakow, 2007
 #
 #  Contributors:
 #
 ###############################################################################
+#
+#  Defines he maximum number of media (MXMED) and the maximum number of
+#  particles on the stack (MXSTACK). This file gets included by the EGSnrc
+#  fortran subroutines (egsnrc_$my_machine.F), the base application
+#  (egs_simple_application.cpp or egs_advanced_application.cpp in
+#  $HEN_HOUSE/egs++), and perhaps also the application, if it uses the particle
+#  stack or one of the structures that depends on the maximum number of media.
+#
+###############################################################################
+*/
 
 
-include $(EGS_CONFIG)
-include $(SPEC_DIR)egspp.spec
-include $(SPEC_DIR)egspp_$(my_machine).conf
+#ifndef ARRAY_SIZES_
+#define ARRAY_SIZES_
 
-DEFS = $(DEF1) -DBUILD_RADIATIVE_SPLITTING_DLL
+#define MXMED   100
+#define MXSTACK 10000
 
-library = egs_radiative_splitting
-lib_files = egs_radiative_splitting
-my_deps = $(common_ausgab_deps)
-extra_dep = $(addprefix $(DSOLIBS), $(my_deps))
-
-include $(SPEC_DIR)egspp_libs.spec
-
-$(make_depend)
-
-test:
-	@echo "common_h2: $(common_h2)"
-	@echo "extra_dep: $(extra_dep)"
+#endif
